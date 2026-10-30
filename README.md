@@ -65,6 +65,8 @@ Ovo je očekivana adresa; aktivna je tek nakon uspešnog objavljivanja i provere
 
 Workflow `.github/workflows/pages.yml` se pokreće nakon push-a na main: testira, pravi `dist/`, konfiguriše Pages i objavljuje artefakt. Ako GitHub token workflow-a ne može da uključi Pages, vlasnik treba jednom da otvori **Settings → Pages → Build and deployment → Source: GitHub Actions**, pa ponovi workflow „Objavi Formulaciju“. Nema ručne izgradnje pri svakom dodavanju linka.
 
+Podržan je i GitHub-ov izbor „Deploy from a branch“, main / root: korenski `index.html` tada preusmerava u `public/`, a `.nojekyll` čuva statičke fajlove. Preporučen je jedan izvor, GitHub Actions, ali oba načina otvaraju istu aplikaciju. Actions artefakt služi sajt direktno iz `dist/`, bez preusmeravanja.
+
 Ne traži se Cloudflare nalog, R2, Cloudflare token niti kartica. Stari ignorisani `.data/` fajlovi prethodne razvojne verzije nisu deo novog sajta i sačuvani su kako korisnički podaci ne bi bili obrisani. Prethodni Cloudflare zahtevi mogu ostati u starom nacrtu podešavanja okruženja; alat ne podržava njihovo brisanje, pa se po potrebi uklanjaju u korisničkom panelu. Aplikacija ih ne koristi.
 
 ## Provere
