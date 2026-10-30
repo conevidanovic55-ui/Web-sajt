@@ -1,0 +1,11 @@
+import { cp, mkdir, readFile, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { validateCatalog } from '../public/lib/catalog.js';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const data = JSON.parse(await readFile(`${root}public/content.json`, 'utf8'));
+const errors = validateCatalog(data);
+if (errors.length) throw new Error(errors.join('\n'));
+await rm(`${root}dist`, { recursive: true, force: true });
+await mkdir(`${root}dist`, { recursive: true });
+await cp(`${root}public`, `${root}dist`, { recursive: true });
+console.log(`Sajt je spreman u dist/ — ${data.races.length} snimaka, ${data.seasons.length} sezona.`);

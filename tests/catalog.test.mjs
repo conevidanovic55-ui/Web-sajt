@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { filterRaces, socialUrl, videoSource, validateCatalog } from '../public/lib/catalog.js';
+const catalog = JSON.parse(await readFile(new URL('../public/content.json', import.meta.url)));
+test('catalog is valid and demo records have no fabricated videos', () => {
+  assert.deepEqual(validateCatalog(catalog), []);
+  assert.equal(catalog.races.filter(r => r.videoUrl).length, 0);
+});
+test('season, type and accent insensitive search combine', () => {
+  assert.equal(filterRaces(catalog.races, { season: '2025', kind: 'Kvalifikacije', query: 'belgije' }).length, 1);
+  assert.equal(filterRaces(catalog.races, { query: 'NEPOSTOJECE' }).length, 0);
+  assert.equal(filterRaces(catalog.races, { query: 'Monca' }).length, 2);
+});
+test('only supported safe video sources are accepted', () => {
+  assert.equal(videoSource('/media/123e4567-e89b-12d3-a456-426614174000.mp4'), null);
+  assert.equal(videoSource('https://youtu.be/abcdefghijk').type, 'embed');
+  assert.equal(videoSource('https://vimeo.com/123456').type, 'embed');
+  for (const value of ['javascript:alert(1)', '//evil.test/x.mp4', '/media/../secret', 'http://example.com/video.mp4', 'https://u:p@example.com/x.mp4']) assert.equal(videoSource(value), null);
+});
+test('social links reject wrong domains and validation handles malformed catalogs', () => {
+  assert.equal(socialUrl('instagram', 'https://www.instagram.com/formulacija/'), 'https://www.instagram.com/formulacija/');
+  assert.equal(socialUrl('instagram', 'https://evil.test/'), null);
+  for (const data of [null, {}, { name: 'a', seasons: {}, races: [{}] }, { name: 'a', seasons: [], races: [null] }]) assert.ok(validateCatalog(data).length);
+  const duplicate = structuredClone(catalog); duplicate.races.push(duplicate.races[0]); assert.ok(validateCatalog(duplicate).some(e => e.includes('jedinstven')));
+});
+
+test('OK.ru watch links become embed links, other services normalize safely', () => {
+  assert.deepEqual(videoSource('https://ok.ru/video/11719629212384'), { type: 'embed', url: 'https://ok.ru/videoembed/11719629212384' });
+  assert.equal(videoSource('https://ok.ru/videoembed/11719629212384').type, 'embed');
+  assert.equal(videoSource('https://www.dailymotion.com/video/x123456').url, 'https://www.dailymotion.com/embed/video/x123456');
+  assert.equal(videoSource('https://streamable.com/abc123').url, 'https://streamable.com/e/abc123');
+  assert.equal(videoSource('https://streamtape.com/v/abc123/title').url, 'https://streamtape.com/e/abc123');
+  assert.equal(videoSource('https://example.com/watch/123').type, 'external');
+  assert.equal(videoSource('https://ok.ru.evil.test/video/123').type, 'external');
+});

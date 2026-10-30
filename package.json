@@ -1,0 +1,14 @@
+{
+  "name": "formulacija",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "node scripts/server.mjs",
+    "start": "node scripts/server.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/server.mjs --dist",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

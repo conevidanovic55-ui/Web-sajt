@@ -1,0 +1,16 @@
+{
+  "name": "Formulacija",
+  "seasons": ["2026", "2025", "2024"],
+  "socials": { "instagram": "https://www.instagram.com/formulacija/", "tiktok": "https://www.tiktok.com/@formulacija_", "youtube": "https://www.youtube.com/@formulacija" },
+  "races": [
+    { "id": "monaco-2026", "title": "Velika nagrada Monaka", "location": "Monte Karlo, Monako", "season": "2026", "category": "Formula 1", "kind": "Trka", "round": 1, "date": "", "duration": "", "art": "monaco", "videoUrl": "" },
+    { "id": "spa-2026", "title": "Velika nagrada Belgije", "location": "Spa-Francorchamps, Belgija", "season": "2026", "category": "Formula 1", "kind": "Trka", "round": 2, "date": "", "duration": "", "art": "spa", "videoUrl": "" },
+    { "id": "monza-2026", "title": "Velika nagrada Italije", "location": "Monca, Italija", "season": "2026", "category": "Formula 1", "kind": "Trka", "round": 3, "date": "", "duration": "", "art": "monza", "videoUrl": "" },
+    { "id": "suzuka-2026", "title": "Velika nagrada Japana", "location": "Suzuka, Japan", "season": "2026", "category": "Formula 1", "kind": "Kvalifikacije", "round": 4, "date": "", "duration": "", "art": "suzuka", "videoUrl": "" },
+    { "id": "silverstone-2026", "title": "Velika nagrada Britanije", "location": "Silverston, Velika Britanija", "season": "2026", "category": "Formula 1", "kind": "Trka", "round": 5, "date": "", "duration": "", "art": "silverstone", "videoUrl": "" },
+    { "id": "australia-2026", "title": "Velika nagrada Australije", "location": "Melburn, Australija", "season": "2026", "category": "Formula 1", "kind": "Sprint", "round": 6, "date": "", "duration": "", "art": "australia", "videoUrl": "" },
+    { "id": "monza-2025", "title": "Velika nagrada Italije", "location": "Monca, Italija", "season": "2025", "category": "Formula 1", "kind": "Trka", "round": 1, "date": "", "duration": "", "art": "monza", "videoUrl": "" },
+    { "id": "spa-2025", "title": "Velika nagrada Belgije", "location": "Spa-Francorchamps, Belgija", "season": "2025", "category": "Formula 1", "kind": "Kvalifikacije", "round": 2, "date": "", "duration": "", "art": "spa", "videoUrl": "" },
+    { "id": "monaco-2024", "title": "Velika nagrada Monaka", "location": "Monte Karlo, Monako", "season": "2024", "category": "Formula 1", "kind": "Trka", "round": 1, "date": "", "duration": "", "art": "monaco", "videoUrl": "" }
+  ]
+}
