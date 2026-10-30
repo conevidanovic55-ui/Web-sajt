@@ -65,7 +65,7 @@ $('#save').addEventListener('click', async () => {
     syncSocials(); const errors = validateCatalog(catalog); if (errors.length) throw new Error(errors.join(' '));
     sha = await publishToGithub(token, catalog, sha); dirty = false; localStorage.removeItem(DRAFT_KEY);
     $('#dirty-status').textContent = 'Poslato na GitHub; objavljivanje je u toku.';
-    message('Izmene su sačuvane na GitHub-u. Javni sajt se ažurira kada GitHub Pages završi objavljivanje, obično za nekoliko minuta.');
+    message('Izmene su sačuvane na GitHub-u. Javni sajt se ažurira kada hosting završi objavljivanje, obično za nekoliko minuta.');
   } catch (error) { message(error.message, true); }
   finally { setBusy(false); }
 });

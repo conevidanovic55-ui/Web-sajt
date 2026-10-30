@@ -78,3 +78,17 @@ python3 tests/browser_smoke.py
 ```
 
 Prve dve komande traže samo Node. Browser test koristi preinstalirani Python Playwright i Chromium. Proverava mobilni prikaz, filtere, projektni `/Web-sajt/` prefiks, OK.ru embed URL i sandbox, spoljne linkove, čuvanje/uvoz/izvoz nacrta i GitHub objavljivanje sa presretnutim API odgovorima. GitHub i video frejmovi u testu su simulirani: test ne potvrđuje stvarnu reprodukciju na OK.ru niti živo javno objavljivanje. Slike prikaza su u ignorisanom `test-results/`.
+
+## Dodatna besplatna adresa: formulatrke.netlify.app
+
+Pripremljen je `netlify.toml`: Node 24, izgradnja `npm run build`, objavljivanje `dist/`, bez serverskih funkcija ili video skladišta. Postojeći `/public/` linkovi se na Netlify-u preusmeravaju na koren sajta. GitHub Pages adresa ostaje dostupna.
+
+Željeni naziv Netlify projekta je **formulatrke**. Dostupnost tog imena i javna adresa nisu potvrđene dok Netlify ne kreira projekat. Ne koristi naziv formulacija za adresu. Brend i društvene mreže ostaju Formulacija.
+
+Vlasnik se prijavljuje na svoj Netlify nalog preko GitHub-a, bira besplatan plan i importuje repozitorijum:
+
+https://app.netlify.com/start/deploy?repository=https://github.com/conevidanovic55-ui/Web-sajt
+
+Pri kreiranju projekta treba izabrati naziv `formulatrke`, granu `main` i postojeću konfiguraciju iz `netlify.toml`, pa pokrenuti objavljivanje. Hosting zatim automatski ažurira sajt nakon promena na main. Nije potrebno dostavljati lozinku ili token u četu. Ako kreiranje traži karticu ili plaćeni paket, ne aktivirati plaćanje; javiti šta prikazuje i zadržati postojeći besplatan GitHub Pages sajt.
+
+Urednik i dalje menja isti `public/content.json` na GitHub-u; time se ažuriraju oba povezana hostinga. Postojeći nacrt iz starog domena ne prenosi se automatski u novi pregledački origin: preuzmi content.json ako želiš da ga uvezeš na novoj adresi.

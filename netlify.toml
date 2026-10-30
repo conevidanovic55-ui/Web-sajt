@@ -1,0 +1,24 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Existing shared /public/ links keep working when the app is served at the domain root.
+[[redirects]]
+  from = "/public/*"
+  to = "/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/content.json"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
