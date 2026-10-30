@@ -63,9 +63,9 @@ Predviđen je **GitHub Pages za javni repozitorijum na GitHub Free**, bez kartic
 
 Ovo je očekivana adresa; aktivna je tek nakon uspešnog objavljivanja i provere. Ako je repozitorijum privatan, nemoj uključivati plaćeni plan: vlasnik prvo treba da odobri javnost repozitorijuma ili izabere drugi besplatan statički hosting. Pages ima standardna ograničenja usluge, dok video saobraćaj ide ka servisu na kojem je snimak.
 
-Workflow `.github/workflows/pages.yml` se pokreće nakon push-a na main: testira, pravi `dist/`, konfiguriše Pages i objavljuje artefakt. Ako GitHub token workflow-a ne može da uključi Pages, vlasnik treba jednom da otvori **Settings → Pages → Build and deployment → Source: GitHub Actions**, pa ponovi workflow „Objavi Formulaciju“. Nema ručne izgradnje pri svakom dodavanju linka.
+Za javno objavljivanje izaberi **Settings → Pages → Build and deployment → Source: Deploy from a branch → main → / (root)** i klikni Save. Nije potrebno ručno pokretati workflow niti birati GitHub Actions kao izvor. GitHub automatski objavljuje promene posle svakog push-a na main.
 
-Podržan je i GitHub-ov izbor „Deploy from a branch“, main / root: korenski `index.html` tada preusmerava u `public/`, a `.nojekyll` čuva statičke fajlove. Preporučen je jedan izvor, GitHub Actions, ali oba načina otvaraju istu aplikaciju. Actions artefakt služi sajt direktno iz `dist/`, bez preusmeravanja.
+Korenski `index.html` preusmerava u `public/`, a `.nojekyll` čuva statičke fajlove. Direktna putanja sajta je i `https://conevidanovic55-ui.github.io/Web-sajt/public/`. Kontrolni workflow Provera sajta proverava kod, ali ne menja objavljivanje. `dist/` ostaje dostupan za lokalni preview ili drugi statički hosting.
 
 Ne traži se Cloudflare nalog, R2, Cloudflare token niti kartica. Stari ignorisani `.data/` fajlovi prethodne razvojne verzije nisu deo novog sajta i sačuvani su kako korisnički podaci ne bi bili obrisani. Prethodni Cloudflare zahtevi mogu ostati u starom nacrtu podešavanja okruženja; alat ne podržava njihovo brisanje, pa se po potrebi uklanjaju u korisničkom panelu. Aplikacija ih ne koristi.
 
