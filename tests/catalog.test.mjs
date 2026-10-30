@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { filterRaces, socialUrl, videoSource, validateCatalog } from '../public/lib/catalog.js';
-const catalog = JSON.parse(await readFile(new URL('../public/content.json', import.meta.url)));
+const catalog = JSON.parse(await readFile(new URL('./fixtures/demo-catalog.json', import.meta.url)));
 test('catalog is valid and demo records have no fabricated videos', () => {
   assert.deepEqual(validateCatalog(catalog), []);
   assert.equal(catalog.races.filter(r => r.videoUrl).length, 0);
@@ -33,4 +33,11 @@ test('OK.ru watch links become embed links, other services normalize safely', ()
   assert.equal(videoSource('https://streamtape.com/v/abc123/title').url, 'https://streamtape.com/e/abc123');
   assert.equal(videoSource('https://example.com/watch/123').type, 'external');
   assert.equal(videoSource('https://ok.ru.evil.test/video/123').type, 'external');
+});
+
+test('published catalog contains the user-provided China 2025 link', async () => {
+  const live = JSON.parse(await readFile(new URL('../public/content.json', import.meta.url)));
+  assert.deepEqual(validateCatalog(live), []);
+  assert.equal(live.races[0].season, '2025');
+  assert.equal(live.races[0].videoUrl, 'https://ok.ru/video/11719629212384');
 });

@@ -53,7 +53,7 @@ Zaštita SHA verzijom sprečava prepisivanje novijih promena iz druge kartice. A
 
 Ne unosi iframe HTML kod niti linkove za preuzimanje koji zahtevaju prijavu. Snimak mora biti dostupan gledaocima. Servis može zabraniti ugrađivanje, tražiti prijavu, ograničiti region ili ukloniti video; sajt to ne zaobilazi. U plejeru postoji i link ka izvornom snimku. Spoljni iframe je sandboxovan bez iskačućih prozora i preusmeravanja glavne stranice.
 
-Početna arhiva ima jasno označene primere bez snimaka. Korisnikov OK.ru link nije automatski dodat u sezonu jer naziv trke i godina nisu potvrđeni. Možeš ga uneti u urednik. Dekorativne ilustracije nisu zvanične mape staza; hero slika je generisana za projekat. Sajt je nezavisna zajednica, a ne zvaničan sajt Formule 1.
+Javna arhiva sadrži korisnikov OK.ru snimak „VN Kine — Sport Klub Hrvatska“, sezona 2025, i tabove za 2025. i 2026. godinu. Početno je izabrana najnovija sezona koja ima video linkove. Testovi koriste zasebnu probnu arhivu sa više sezona. Dekorativne ilustracije nisu zvanične mape staza; hero slika je generisana za projekat. Sajt je nezavisna zajednica, a ne zvaničan sajt Formule 1.
 
 ## Besplatno javno objavljivanje
 

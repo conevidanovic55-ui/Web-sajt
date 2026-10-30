@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'test-results'
 OUT.mkdir(exist_ok=True)
-seed = json.loads((ROOT / 'public/content.json').read_text())
+seed = json.loads((ROOT / 'tests/fixtures/demo-catalog.json').read_text())
 remote = {'catalog': seed, 'sha': 'seed-sha', 'published': False}
 server = subprocess.Popen(['node', 'scripts/server.mjs', '--dist'], cwd=ROOT, env={**os.environ, 'PORT': '3001'}, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 try:
@@ -28,6 +28,7 @@ try:
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path='/usr/bin/chromium', headless=True, args=['--no-sandbox'])
         context = browser.new_context(viewport={'width': 1440, 'height': 1000}, device_scale_factor=1)
+        context.route('**/content.json', lambda route: route.fulfill(json=seed))
         context.route('https://ok.ru/**', lambda route: route.fulfill(body='<p>Intercepted provider frame for browser test</p>', content_type='text/html'))
         def github(route):
             assert route.request.headers.get('authorization') == 'Bearer browser-test-token'
@@ -132,12 +133,22 @@ try:
         # GitHub project subpath must preserve all relative assets and catalog requests.
         page.unroute('**/content.json')
         def project_path(route):
+            if route.request.url.endswith('/content.json'):
+                route.fulfill(json=seed)
+                return
             response = route.fetch(url=route.request.url.replace('/Web-sajt/', '/'))
             route.fulfill(response=response)
         context.route('**/Web-sajt/**', project_path)
         page.goto('http://127.0.0.1:3001/Web-sajt/')
         page.locator('.race-card').first.wait_for()
         assert page.locator('.race-card').count() == 6
+        # Finally verify the actual public catalog without test fixture interception.
+        context.unroute('**/content.json')
+        page.goto('http://127.0.0.1:3001/')
+        page.locator('.race-card').first.wait_for()
+        assert page.locator('.race-card').count() == 1
+        assert 'VN Kine' in page.locator('.card-title').inner_text()
+        assert page.get_by_role('button', name='Sezona 2025').get_attribute('aria-pressed') == 'true'
         assert not errors, errors
         browser.close()
     print('PASS: static site, mobile layouts, project subpath, filters, OK.ru embed normalization and sandbox, external fallback, draft persistence/import/export, and mocked GitHub publication. No JS errors. Live provider playback and public deployment are not tested here.')

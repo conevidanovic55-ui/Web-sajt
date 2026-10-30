@@ -3,6 +3,7 @@ const $ = selector => document.querySelector(selector);
 const state = { season: 'all', kind: 'all', query: '', sort: 'newest' };
 let catalog;
 const tracks = {
+  shanghai: { code: 'SHA', bg: '#cfbdb5', ink: '#805047', path: 'M35 110 52 86Q25 43 69 31Q112 17 126 51Q133 77 107 81Q87 82 87 64L106 58 131 73 149 55 177 66 195 33 227 37 241 57 221 76 259 99 252 121 202 113 183 129 157 111 132 126 104 110 77 125Z' },
   monaco: { code: 'MON', bg: '#bfcabb', ink: '#425b46', path: 'M40 100 54 82 76 84 93 71 112 74 124 53 143 48 153 23 169 30 163 47 187 54 203 38 225 38 235 53 256 57 266 77 245 82 230 103 217 104 205 120 181 112 167 124 142 115 132 123 108 110 86 116 75 104Z' },
   spa: { code: 'SPA', bg: '#d5d4bc', ink: '#67633c', path: 'M32 113 77 117 92 102 119 104 136 82 153 86 164 64 189 59 203 30 221 20 246 33 254 55 270 73 253 81 240 68 221 77 214 96 198 99 187 115 160 121 145 112 126 122 95 132 43 130Z' },
   monza: { code: 'MNZ', bg: '#d9c2b6', ink: '#8c5746', path: 'M43 117 67 104 87 110 106 89 143 81 156 64 172 69 216 23Q244 4 263 26Q278 48 260 70L221 112 201 109 185 128 70 134Z' },
@@ -23,7 +24,7 @@ async function loadCatalog() {
     if (!response.ok) throw new Error('Catalog unavailable');
     catalog = await response.json();
     if (validateCatalog(catalog).length) throw new Error('Invalid catalog');
-    state.season = catalog.seasons[0];
+    state.season = catalog.seasons.find(season => catalog.races.some(r => r.season === season && r.videoUrl)) || catalog.seasons[0];
     renderSeasons(); renderSocials(); render();
     $('#archive-note').textContent = catalog.races.some(r => r.videoUrl) ? 'Spremno za gledanje' : 'Probna arhiva';
     $('#demo-note').hidden = catalog.races.some(r => r.videoUrl);

@@ -85,7 +85,7 @@ export function validateCatalog(data) {
     if (race.date && (!/^\d{4}-\d{2}-\d{2}$/.test(race.date) || Number.isNaN(Date.parse(race.date)) || new Date(race.date).toISOString().slice(0, 10) !== race.date)) errors.push('Neispravan datum snimka.');
     if (race.duration && (typeof race.duration !== 'string' || !/^\d{1,2}:\d{2}(?::\d{2})?$/.test(race.duration))) errors.push('Trajanje koristi oblik 1:30:00.');
     if (race.videoUrl && !videoSource(race.videoUrl)) errors.push(`Nepodržan video link: ${race.title}.`);
-    if (!['monaco', 'spa', 'monza', 'suzuka', 'silverstone', 'australia'].includes(race.art)) errors.push('Izaberi postojeću ilustraciju staze.');
+    if (!['monaco', 'spa', 'monza', 'suzuka', 'silverstone', 'australia', 'shanghai'].includes(race.art)) errors.push('Izaberi postojeću ilustraciju staze.');
   }
   for (const platform of Object.keys(SOCIAL_HOSTS)) {
     if (data.socials?.[platform] && !socialUrl(platform, data.socials[platform])) errors.push(`Neispravan ${platform} link.`);
