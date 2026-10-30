@@ -149,6 +149,10 @@ try:
         assert page.locator('.race-card').count() == 1
         assert 'VN Kine' in page.locator('.card-title').inner_text()
         assert page.get_by_role('button', name='Sezona 2025').get_attribute('aria-pressed') == 'true'
+        page.set_viewport_size({'width': 1440, 'height': 1000})
+        page.screenshot(path=str(OUT / 'desktop.png'), full_page=True)
+        page.set_viewport_size({'width': 390, 'height': 844})
+        page.screenshot(path=str(OUT / 'mobile.png'), full_page=True)
         assert not errors, errors
         browser.close()
     print('PASS: static site, mobile layouts, project subpath, filters, OK.ru embed normalization and sandbox, external fallback, draft persistence/import/export, and mocked GitHub publication. No JS errors. Live provider playback and public deployment are not tested here.')
