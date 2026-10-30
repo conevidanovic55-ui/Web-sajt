@@ -92,3 +92,7 @@ https://app.netlify.com/start/deploy?repository=https://github.com/conevidanovic
 Pri kreiranju projekta treba izabrati naziv `formulatrke`, granu `main` i postojeću konfiguraciju iz `netlify.toml`, pa pokrenuti objavljivanje. Hosting zatim automatski ažurira sajt nakon promena na main. Nije potrebno dostavljati lozinku ili token u četu. Ako kreiranje traži karticu ili plaćeni paket, ne aktivirati plaćanje; javiti šta prikazuje i zadržati postojeći besplatan GitHub Pages sajt.
 
 Urednik i dalje menja isti `public/content.json` na GitHub-u; time se ažuriraju oba povezana hostinga. Postojeći nacrt iz starog domena ne prenosi se automatski u novi pregledački origin: preuzmi content.json ako želiš da ga uvezeš na novoj adresi.
+
+## Vizuelni identitet
+
+Crvena, crna i bela paleta usklađena je sa korisnikovom profilnom referencom. Beli logo u zaglavlju, dnu i delu O nama prikazuje se iz `public/assets/formulacija-logo.png`. Pošto se zasebni korisnikov prilog prikazivao kao potpuno bela slika i nije imao dostupan lokalni fajl, ova verzija je generisana prema vidljivom logotipu iz profilne reference, a nije predstavljena kao originalni izvorni PNG/SVG. Asset je crn na providnoj pozadini i CSS filter ga prikazuje belo; to čuva čiste konture pri prikazu na tamnom sajtu. Izvorni logo može naknadno da ga zameni.
